@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vikash | AI Developer</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #ffffff;
+      --bg2: #f7f7f5;
+      --bg3: #f1f0eb;
+      --text: #1a1a18;
+      --muted: #6b6b67;
+      --hint: #9b9b97;
+      --border: rgba(0,0,0,0.1);
+      --accent: #185FA5;
+      --accent-bg: #E6F1FB;
+      --accent-text: #0C447C;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1a;
+        --bg2: #242422;
+        --bg3: #2a2a28;
+        --text: #f0ede8;
+        --muted: #9b9b97;
+        --hint: #6b6b67;
+        --border: rgba(255,255,255,0.1);
+        --accent: #85B7EB;
+        --accent-bg: #042C53;
+        --accent-text: #B5D4F4;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg3);
+      color: var(--text);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { font-size: 16px; font-weight: 500; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 3.5rem 2rem;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 3.5rem;
+    }
+    .hero h1 {
+      font-size: 34px;
+      font-weight: 500;
+      margin-bottom: .75rem;
+      letter-spacing: -0.5px;
+    }
+    .hero p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 1.5rem;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 1.75rem;
+    }
+    .badge {
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      border-radius: 99px;
+      font-size: 12px;
+      padding: 4px 12px;
+      color: var(--muted);
+    }
+    .btn-row { display: flex; gap: 12px; justify-content: center; }
+    .btn {
+      padding: 9px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      border: 0.5px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-family: inherit;
+      transition: background .15s, transform .1s;
+    }
+    .btn:hover { background: var(--bg2); }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: transparent;
+    }
+    .btn-primary:hover { opacity: 0.88; background: var(--text); }
+
+    /* ── SECTION TITLE ── */
+    h2.section-title {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      padding-bottom: .75rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: border-color .2s;
+    }
+    .card:hover { border-color: rgba(0,0,0,0.25); }
+    .card-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      margin-bottom: .75rem;
+      background: var(--accent-bg);
+      color: var(--accent-text);
+    }
+    .card h3 { font-size: 15px; font-weight: 500; margin-bottom: .4rem; }
+    .card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tech {
+      font-size: 11px;
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: var(--muted);
+    }
+    .card-links {
+      display: flex;
+      gap: 14px;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 0.5px solid var(--border);
+    }
+    .card-links a { font-size: 13px; color: var(--muted); transition: color .15s; }
+    .card-links a:hover { color: var(--text); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .skill-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+    .skill-label { font-size: 11px; color: var(--hint); margin-bottom: .3rem; }
+    .skill-name { font-size: 14px; font-weight: 500; }
+    .bar {
+      height: 3px;
+      background: var(--bg3);
+      border-radius: 2px;
+      margin-top: .6rem;
+      overflow: hidden;
+    }
+    .bar-fill { height: 100%; border-radius: 2px; background: var(--accent); }
+
+    /* ── CONTACT ── */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 520px;
+    }
+    form input, form textarea {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: var(--text);
+      font-family: inherit;
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    form textarea { resize: vertical; min-height: 110px; }
+    form input:focus, form textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(24,95,165,.12);
+    }
+    .toast {
+      display: none;
+      background: #EAF3DE;
+      color: #27500A;
+      border: 0.5px solid #97C459;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 13px;
+      color: var(--hint);
+      border-top: 0.5px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 26px; }
+      nav { padding: 0 1rem; }
+      section { padding: 2.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Vikash</div>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>AI Developer &amp; Automation Builder</h1>
+  <p>I build RAG chatbots, agentic workflows, and AI-powered web solutions for startups and small businesses.</p>
+  <div class="badge-row">
+    <span class="badge">LangChain</span>
+    <span class="badge">n8n</span>
+    <span class="badge">CrewAI</span>
+    <span class="badge">FastAPI</span>
+    <span class="badge">AutoGen</span>
+    <span class="badge">OpenAI</span>
+    <span class="badge">MCP</span>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="scroll('projects')">View projects</button>
+    <button class="btn" onclick="scroll('contact')">Hire me</button>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2 class="section-title">Projects</h2>
+  <div class="projects-grid">
+
+    <div class="card">
+      <span class="card-tag">RAG · SaaS</span>
+      <h3>AutoRAG AI</h3>
+      <p>Micro-SaaS enabling small businesses to deploy RAG chatbots via document upload — no code required. FastAPI backend with ChromaDB vector store.</p>
+      <div class="tech-row">
+        <span class="tech">FastAPI</span>
+        <span class="tech">Next.js 14</span>
+        <span class="tech">ChromaDB</span>
+        <span class="tech">Supabase</span>
+      </div>
+      <div class="card-links">
+        <a href="https://github.com/" target="_blank">GitHub</a>
+        <a href="#" target="_blank">Live demo</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag">Automation</span>
+      <h3>Gmail AI classifier</h3>
+      <p>n8n workflow that classifies incoming Gmail threads with OpenAI and auto-routes emails to correct labels — zero manual sorting.</p>
+      <div class="tech-row">
+        <span class="tech">n8n</span>
+        <span class="tech">OpenAI</span>
+        <span class="tech">Gmail API</span>
+      </div>
+      <div class="card-links">
+        <a href="https://github.com/" target="_blank">GitHub</a>
+        <a href="#" target="_blank">Case study</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-tag">Agentic AI</span>
+      <h3>Multi-agent research bot</h3>
+      <p>CrewAI pipeline with specialized agents for web search, summarization, and structured report generation from any topic.</p>
+      <div class="tech-row">
+        <span class="tech">CrewAI</span>
+        <span class="tech">LangChain</span>
+        <span class="tech">Python</span>
+      </div>
+      <div class="card-links">
+        <a href="https://github.com/" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-label">Framework</div>
+      <div class="skill-name">LangChain</div>
+      <div class="bar"><div class="bar-fill" style="width:92%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-label">Automation</div>
+      <div class="skill-name">n8n / Make.com</div>
+      <div class="bar"><div class="bar-fill" style="width:88%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-label">Backend</div>
+      <div class="skill-name">FastAPI / Node.js</div>
+      <div class="bar"><div class="bar-fill" style="width:82%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-label">Frontend</div>
+      <div class="skill-name">React / Next.js</div>
+      <div class="bar"><div class="bar-fill" style="width:76%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-label">Multi-agent</div>
+      <div class="skill-name">CrewAI / AutoGen</div>
+      <div class="bar"><div class="bar-fill" style="width:84%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-label">Vector DB</div>
+      <div class="skill-name">ChromaDB / Pinecone</div>
+      <div class="bar"><div class="bar-fill" style="width:80%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-label">Database</div>
+      <div class="skill-name">Supabase / MongoDB</div>
+      <div class="bar"><div class="bar-fill" style="width:78%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-label">Protocol</div>
+      <div class="skill-name">MCP / Voice AI</div>
+      <div class="bar"><div class="bar-fill" style="width:74%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-title">Get in touch</h2>
+  <form id="contactForm" onsubmit="handleSubmit(event)">
+    <input type="text" id="fname" placeholder="Your name" required />
+    <input type="email" id="femail" placeholder="Email address" required />
+    <input type="text" id="fcompany" placeholder="Company / project (optional)" />
+    <textarea id="fmsg" placeholder="Tell me about your project..." required></textarea>
+    <button type="submit" class="btn btn-primary" style="align-self:flex-start">
+      Send message
+    </button>
+    <div class="toast" id="toast">
+      Message sent! I'll get back to you within 24 hours.
+    </div>
+  </form>
+</section>
+
+<footer>
+  Built with React + Express + MongoDB &nbsp;·&nbsp; Chennai, India
+  &nbsp;·&nbsp;
+  <a href="mailto:vikash@example.com" style="color:inherit">vikash@example.com</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/" target="_blank" style="color:inherit">GitHub</a>
+  &nbsp;·&nbsp;
+  <a href="https://linkedin.com/" target="_blank" style="color:inherit">LinkedIn</a>
+</footer>
+
+<script>
+  function scroll(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const payload = {
+      name:    document.getElementById('fname').value,
+      email:   document.getElementById('femail').value,
+      company: document.getElementById('fcompany').value,
+      message: document.getElementById('fmsg').value,
+    };
+
+    /*
+     * Replace the URL below with your Express backend endpoint.
+     * Example: https://your-backend.onrender.com/api/contact
+     *
+     * To test locally without a backend, comment out the fetch block
+     * and just show the toast directly.
+     */
+    try {
+      const res = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Server error');
+    } catch (_) {
+      // For demo / static deploy — show toast anyway
+    }
+
+    document.getElementById('contactForm').reset();
+    const toast = document.getElementById('toast');
+    toast.style.display = 'block';
+    setTimeout(() => toast.style.display = 'none', 4000);
+  }
+</script>
+
+</body>
+</html>
